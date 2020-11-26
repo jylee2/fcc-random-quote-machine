@@ -6,108 +6,27 @@
         <!-- Font Awesome for Twitter Icon -->            
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
         <!-- Load custom css -->
         <link rel="stylesheet" href="custom.css">
-    
         <title>Random Quote Machine</title>
     </head>
-
     <body>
         <!-- Needed for Bootstrap -->
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
         <!-- Load React -->
         <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
         <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
         <!-- Twitter Share Button -->
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
         <!-- React Container -->
         <div id="react-container" class="container"></div>
-        <!-- Load quotes input -->
-        <script src="input.js"></script>
-
-        <!-- React.JS Component -->
-        <script type="text/babel">
-            class MyReactComponent extends React.Component {
-                constructor(props) {
-                    super(props);
-                    this.state = {
-                        count: 0
-                        };
-                    this.handleSubmit = this.handleSubmit.bind(this);
-                }
-                //When button is clicked, generate new random decimal
-                handleSubmit() {
-                    this.setState({
-                        count: Math.random()
-                    });
-                }
-                render() {
-                    
-                    //Create whole number between 0 and quotes.length
-                    let index = Math.floor(this.state.count * quotes.length);
-                    let quoteDisplay = quotes[index]["quote"];
-                    let authorDisplay = quotes[index]["author"];
-                    //Converting white spaces to "%20" for url
-                    let quoteTweetLink = quoteDisplay.replace(/\s/g, "%20");
-                    let authorTweetLink = authorDisplay.replace(/\s/g, "%20");
-                    //Tweet URL
-                    let newTweetLink = `https://twitter.com/intent/tweet?screen_name=jyleeblog&text=`;
-                    newTweetLink += `%22` + quoteTweetLink + `%22`;
-                    newTweetLink += "%20-%20" + authorTweetLink;
-
-                    return (
-                        <div class="row">
-                            <div class="col-md-3">
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <div class="customClassMain">
-                                    <div>
-                                        <h1><b>Random Quote Machine</b></h1><br />
-                                    </div>
-                                    <div>
-                                        <wrapper id="quote-box">
-                                            <div id="text" class="customClassP">
-                                                "{quoteDisplay}"
-                                            </div>
-                                            <div id="author" class="customClassP">
-                                                - {authorDisplay}
-                                            </div><br />
-                                            <a target="_blank" href={newTweetLink} id="tweet-quote">
-                                                <button type="button" class="btn btn-lg btn-block">
-                                                    <span class="fa-stack">
-                                                        <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                                        <i class="fa fa-twitter fa-stack-1x"></i>
-                                                    </span>
-                                                     Tweet
-                                                </button>
-                                            </a>
-                                            <br/>
-                                            <button type="button" class="btn btn-lg btn-block" id="new-quote" onClick={this.handleSubmit}>New Quote</button>
-                                            <br/>
-                                            <p>Quotes are sourced from <a target="_blank" href="https://www.forbes.com/sites/kevinkruse/2013/05/28/inspirational-quotes/?sh=3c7a89506c7a">Forbes</a></p>
-                                        </wrapper>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                            </div>
-                        </div>                        
-                    );
-                }
-            }
-            ReactDOM.render(<MyReactComponent />, document.getElementById('react-container'))
-        </script>
-
+        <!-- Load React.JS Component -->
+        <script type="text/babel" src="input.js"></script>
         <!-- Load freeCodeCamp test script -->
         <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-
     </body>
 </html>

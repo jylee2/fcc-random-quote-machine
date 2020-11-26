@@ -74,3 +74,73 @@ const quotes =
         author: "Socrates"
     }
 ];
+// React Component
+class MyReactComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+            };
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    //When button is clicked, generate new random decimal
+    handleSubmit() {
+        this.setState({
+            count: Math.random()
+        });
+    }
+    render() {
+        
+        //Create whole number between 0 and quotes.length
+        let index = Math.floor(this.state.count * quotes.length);
+        let quoteDisplay = quotes[index]["quote"];
+        let authorDisplay = quotes[index]["author"];
+        //Converting white spaces to "%20" for url
+        let quoteTweetLink = quoteDisplay.replace(/\s/g, "%20");
+        let authorTweetLink = authorDisplay.replace(/\s/g, "%20");
+        //Tweet URL
+        let newTweetLink = `https://twitter.com/intent/tweet?screen_name=jyleeblog&text=`;
+        newTweetLink += `%22` + quoteTweetLink + `%22`;
+        newTweetLink += "%20-%20" + authorTweetLink;
+
+        return (
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="customClassMain">
+                        <div>
+                            <h1><b>Random Quote Machine</b></h1><br />
+                        </div>
+                        <div>
+                            <wrapper id="quote-box">
+                                <div id="text" class="customClassP">
+                                    "{quoteDisplay}"
+                                </div>
+                                <div id="author" class="customClassP">
+                                    - {authorDisplay}
+                                </div><br />
+                                <a target="_blank" href={newTweetLink} id="tweet-quote">
+                                    <button type="button" class="btn btn-lg btn-block">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x"></i>
+                                        </span>
+                                         Tweet
+                                    </button>
+                                </a>
+                                <br/>
+                                <button type="button" class="btn btn-lg btn-block" id="new-quote" onClick={this.handleSubmit}>New Quote</button>
+                                <br/>
+                                <p>Quotes are sourced from <a target="_blank" href="https://www.forbes.com/sites/kevinkruse/2013/05/28/inspirational-quotes/?sh=3c7a89506c7a">Forbes</a></p>
+                            </wrapper>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>                        
+        );
+    }
+}
+ReactDOM.render(<MyReactComponent />, document.getElementById('react-container'))
